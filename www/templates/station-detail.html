@@ -1,0 +1,24 @@
+<ion-view view-title="{{station.name}}">
+	<ion-content>
+		<div class="list">
+			<li class="item item-icon-left">
+				<i class="icon ion-location"></i>
+				<h2>{{station.name}}</h2>
+			    <p>{{station.address}}</p>  
+			</li>
+			<li class="item item-icon-left">
+				<i class="icon ion-social-usd"></i>
+				<h2>Price</h2>
+			    <p>{{station.price}}</p>  
+			</li>
+			<li class="item item-icon-left">
+				<i class="icon ion-ios7-bolt"></i>
+				<h2>Details</h2>
+			    <p>{{station.details}}</p>  
+			</li>
+		</div>
+		<div id="detail-map" data-tap-disabled="true" style="width: 100%; height:100vh;"></div>
+		
+	
+	</ion-content>
+</ion-view>

@@ -1,0 +1,11 @@
+<ion-view view-title="Stations">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-avatar" ng-repeat="station in stations" type="item-text-wrap" href="#/tab/station/{{station.id}}">
+        <h2>{{station.name}}</h2>
+        <p>{{station.id}}</p>
+		
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
