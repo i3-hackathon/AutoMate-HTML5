@@ -1,6 +1,9 @@
 {
   "name": "hackthedrive-html5",
   "private": "true",
+  "dependencies": {
+    "bmw-js": "*"
+  },
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-beta.14"
   }
