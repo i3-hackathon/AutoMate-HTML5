@@ -94,4 +94,36 @@ angular.module('starter.services', [])
       return friends[friendId];
     }
   }
+})
+
+
+/**
+ * A simple example service that returns some data.
+ */
+.factory('Rules', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  // Some fake testing data
+  var rules = [{
+	  id: 0,
+	  name: 'Find Station',
+	  event: 'Battery Level',
+	  action: 'Find Nearest Station'
+  }];
+
+
+  return {
+    all: function() {
+      return rules;
+    },
+    get: function(ruleId) {
+      // Simple index lookup
+      return rules[ruleId];
+    },
+	set: function(rule) {
+		rules.push(rule);
+		return;
+	}
+  }
 });

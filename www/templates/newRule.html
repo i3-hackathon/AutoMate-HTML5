@@ -1,0 +1,37 @@
+<div id="task-view" class="modal slide-in-up" ng-controller="NewRuleCtrl">
+    <header class="bar bar-header bar-secondary">
+      <h1 class="title">New Rule</h1>
+      <button class="button button-clear button-primary" ng-click="close()">Cancel</button>
+    </header>
+    <ion-content class="padding has-header">
+	
+		<div class="card">
+		  <div class="item item-divider">
+		  	Event
+		  </div>
+		  <div class="item item-text-wrap padding">
+	  		<button class="button button-block button-outline button-positive" ng-click="showEvents()">Choose an Event</button>
+			  
+		  </div>
+		</div>
+
+		<div class="card">
+		  <div class="item item-divider">
+		  	Action
+		  </div>
+		  <div class="item item-text-wrap padding">
+	  		<button class="button button-block button-outline button-positive" ng-click="showEvents()">Choose an Action</button>
+			  
+		  </div>
+		</div>
+		
+      <input type="text" placeholder="I need to do this...">
+	  
+      <button class="button button-primary button-block button-positive" ng-click="save()">Save</button>
+	  
+    </ion-content>
+	
+	
+	
+	
+</div>

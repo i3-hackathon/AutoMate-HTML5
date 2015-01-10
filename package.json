@@ -1,7 +1,7 @@
 {
-  "name": "hackthedrive-html5",
+  "name": "bmw",
   "version": "1.0.0",
-  "description": "hackthedrive-html5: An Ionic project",
+  "description": "bmw: An Ionic project",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
