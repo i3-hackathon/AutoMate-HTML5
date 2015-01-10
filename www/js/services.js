@@ -1,5 +1,20 @@
 angular.module('starter.services', [])
 
+.factory('ConfigService', function() {
+
+	var configs = {
+			platform : new H.service.Platform({
+				'app_id': 'pWzT1cYjvJrV8Fyqc4SJ',
+				'app_code': 'oCAePpgSoO6_Ny1VvB4f0Q'
+			})
+	}
+
+	return configs;
+			
+	
+})
+
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
@@ -123,6 +138,36 @@ angular.module('starter.services', [])
     },
 	set: function(rule) {
 		rules.push(rule);
+		return;
+	}
+  }
+})
+
+.factory('Stations', function() {
+  // Might use a resource here that returns a JSON array
+
+  // Some fake testing data
+  // Some fake testing data
+  var stations = [{
+	  id: 0,
+	  name: 'BMW Research Mt View',
+	  price: 'Free',
+	  details: 'LD, J1772 6.60 kw',
+	  address: '160 E. El Camino Real, Mountain View, CA 94040',
+	  coords: [37.380644, -122.074190]
+  }];
+
+
+  return {
+    all: function() {
+      return stations;
+    },
+    get: function(stationId) {
+      // Simple index lookup
+      return stations[stationId];
+    },
+	set: function(station) {
+		statios.push(station);
 		return;
 	}
   }
