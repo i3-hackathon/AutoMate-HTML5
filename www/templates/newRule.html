@@ -8,9 +8,10 @@
 		<div class="card">
 		  <div class="item item-divider">
 		  	Event
+        <a href="#" ng-click="showTriggers();" style="float: right;"><i class="icon ion-edit"></i></a>
 		  </div>
 		  <div class="item item-text-wrap padding">
-	  		<button class="button button-block button-outline button-positive" ng-click="showEvents()">Choose an Event</button>
+        <ng-include src="triggerTemplate()">
 			  
 		  </div>
 		</div>
