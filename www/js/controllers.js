@@ -39,6 +39,10 @@ angular.module('starter.controllers', [])
 	};
 })
 
+.controller('RuleDetailCtrl', function($scope, $stateParams, Rules) {
+  $scope.rule = Rules.get($stateParams.ruleId);
+})
+
 .controller('NewRuleCtrl', function($scope, $ionicActionSheet, Rules) {
 
 	console.log(Rules);
@@ -93,10 +97,25 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('RuleDetailCtrl', function($scope, $stateParams, Rules) {
-  $scope.rule = Rules.get($stateParams.ruleId);
+.controller('StationsCtrl', function($scope, Stations) {
+	$scope.stations = Stations.all();
 })
 
+.controller('StationDetailCtrl', function($scope, $stateParams, Stations, ConfigService) {
+	$scope.station = Stations.get($stateParams.stationId);
+	
+	console.log("staiton: ", $scope.station.coords)
+	// Obtain the default map types from the platform object:
+	var maptypes = ConfigService.platform.createDefaultLayers();    
+	var mapID = document.getElementById('map');
+	var options = {
+		zoom: 15,
+	    center: { lng: $scope.station.coords[1], lat: $scope.station.coords[0] }
+	}
+
+	map = new H.Map(document.getElementById('detail-map'), maptypes.terrain.map, options);	
+	
+})
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
