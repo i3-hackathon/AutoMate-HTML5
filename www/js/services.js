@@ -60,7 +60,7 @@ angular.module('starter.services', [])
 	
 })
 
-.factory('Mojio', function(ConfigService) {
+.factory('Mojio', function(ConfigService, PubNub) {
   console.log('Mojio');
   console.log(BMWClient);
   var BMWClient = window.BMWClient;
@@ -94,6 +94,7 @@ angular.module('starter.services', [])
       bmw_client.observe(vehicle, null, function(entity) {
         //event callback
         console.log(entity);
+        PubNub.publish('battery_level', entity.LastBatteryLevel);
       }, function(err, res) {
         //connection callback
         if (err) {
@@ -136,6 +137,22 @@ angular.module('starter.services', [])
       localStorage.setItem('mojioPassword', password);
       login(function() {
         observeVehicle(); 
+      });
+    }
+  };
+})
+
+.service('PubNub', function() {
+  var pubnub = PUBNUB.init({
+    publish_key: 'pub-c-7c88a9b8-5323-4d53-8256-8cd931d155d2',
+    subscribe_key: 'sub-c-4248af1a-999f-11e4-91be-02ee2ddab7fe'
+  });
+  console.log(pubnub);
+  return {
+    publish: function(channel, message) {
+      pubnub.publish({
+        channel:channel, 
+        message:message
       });
     }
   };
