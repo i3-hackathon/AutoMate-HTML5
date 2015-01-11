@@ -160,7 +160,6 @@ angular.module('starter.controllers', [])
 .controller('StationDetailCtrl', function($scope, $stateParams, Stations, ConfigService) {
 	$scope.station = Stations.get($stateParams.stationId);
 	
-	console.log("staiton: ", $scope.station.coords)
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
 	var mapID = document.getElementById('map');
