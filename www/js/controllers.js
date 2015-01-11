@@ -57,11 +57,7 @@ angular.module('starter.controllers', [])
   };
 
   $scope.reset();
-	$scope.rule = { trigger : { name : 'choose', label : 'Event' }, action : { name : 'choose', label : 'Action'} };
-	
-	$scope.batteryLevel = 80;
-	$scope.rule.trigger.batteryLevel = 80;
-	
+	$scope.rule = { trigger : { name : 'choose', label : 'Event' }, action : { name : 'choose', label : 'Action'} };	
 	
 	/* Just show that a label shows before the type is choosen */
 	//$scope.trigger = "Event";
@@ -89,8 +85,7 @@ angular.module('starter.controllers', [])
 		$scope.modal.hide();
 		
 		/* TODO: Save current form to Local Storage */
-		var object = { id: Rules.all().length ,	  name: 'Get Work Charger',	  event: 'Car is Near Station',	action: 'Reserve Charging Station' }
-		Rules.set(object);
+		Rules.set($scope.rule);
 	}
 	
   // Triggered on a button click, or some other target
