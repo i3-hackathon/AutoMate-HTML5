@@ -30,7 +30,12 @@ angular.module('starter.services', [])
 			'availability' : {
 				name: 'Station Availability',
 				icon: 'ion-clock'
+			},
+			'cannot-find-parking' : {
+				name: 'Looking for Parking or Station',
+				icon: 'ion-arrow-return-rightd'
 			}			
+					
 		},
 		actions : {
 	 	  'send-message' : 	{
@@ -201,7 +206,8 @@ angular.module('starter.services', [])
   // Some fake testing data
   var rules = [
 		{ id : 0, "trigger" : { "name" : "near-location", "label" : "Car is Near Location", "options" : { "location" :  "Palo Alto" } }, "action": { "name" : "reserve-station", "label" : "Reserve Station" , "reserve" : { "id" : 0, "name" : "BMW Research Mt View", "price" : "Free" , "details" : "LD, J1772 6.60 kw","address":"160 E. El Camino Real, Mountain View, CA 94040","coords":[37.380644,-122.07419] }}},
-		{ id : 1, "trigger": { "name" : "battery-level", "label" :"Battery Level", "options": { "level" : "82", "above" : "is Above" }},"action":{"name":"stop-charging","label": "Stop Charging", "options" : { "when" : "Now" }}}
+		{ id : 1, "trigger": { "name" : "battery-level", "label" :"Battery Level", "options": { "level" : "82", "above" : "is Above" }},"action":{"name":"stop-charging","label": "Stop Charging", "options" : { "when" : "Now" }}},
+		{ id : 2, "trigger": {"name":"cannot-find-parking","label":"Looking for Parking or Station"},"action":{"name":"reserve-station","label":"Reserve Station","options":{"which":"once"},"option":{"when":"now"}}}
   ];		 		
 
   return {
