@@ -65,7 +65,9 @@ angular.module('starter.services', [])
 	
 })
 
-.factory('Mojio', function(ConfigService, PubNub, SMS, Pushbullet) {
+.factory('Mojio', function($ionicPopup, ConfigService, PubNub, SMS, Pushbullet) {
+  
+  var data = { findChargePoint: 0};
   console.log('Mojio');
   console.log(BMWClient);
   var BMWClient = window.BMWClient;
@@ -85,12 +87,20 @@ angular.module('starter.services', [])
   var Observer = bmw_client.model('Observer');
   var Vehicle = bmw_client.model('Vehicle');
   var App = bmw_client.model('App');
+  var sumHeading = 0;
 
   var checkRules = function(vehicle) {
     if (vehicle.LastBatteryLevel > 98) {
       console.log('rule: battery full');
       SMS.sendSMS('+16508633292', 'You battery is fully charged');
-      //Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
+      Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
+    }
+    sumHeading = sumHeading + vehicle.LastHeading;
+    if (sumHeading > 520) {
+      console.log('rule: looking for traffic');
+      sumHeading = 0;
+      data.findChargePoint = data.findChargePoint+1; 
+      window.location = '/#/tab/map';
     }
   };
 
@@ -139,7 +149,9 @@ angular.module('starter.services', [])
     });
   }
 
+
   return {
+    data: data,
     username: function() {
       return localStorage.getItem('mojioUsername');
     },
