@@ -3972,7 +3972,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   overflow: hidden;
   min-height: 100%;
   width: 100%;
-  background-color: #F0F0F0; }
+  background-color: #fff; }
 
 @media (min-width: 680px) {
   .modal {

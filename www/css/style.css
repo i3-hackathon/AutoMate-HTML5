@@ -4,11 +4,16 @@
 }
 
 .scroll-content, .modal, .modal-backdrop {
-		background: #f8f8f8 !important;
+		background: #E7E7E7 !important;
 }
 
 .right {
 	clear:both;
 	display:block;
 	float:right;
+}
+
+.action-icon {
+	position:absolute; 
+	left:10px;
 }
