@@ -88,6 +88,7 @@ angular.module('starter.services', [])
 
   var checkRules = function(vehicle) {
     if (vehicle.LastBatteryLevel > 98) {
+      window.location = '/#/tab/map';
       console.log('rule: battery full');
       SMS.sendSMS('+16508633292', 'You battery is fully charged');
       //Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
