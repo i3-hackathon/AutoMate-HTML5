@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.background, .background .pane, .background .item, .background .item-complex .item-content{
+    background-color: #000000;
+}
+
+.right {
+	clear:both;
+	display:block;
+	float:right;
+}
