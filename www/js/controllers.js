@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
 							map.addObject(marker);
 
 							BMW.navigation('Chargepoint', lat, long);
-              Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
+              Pushbullet.push('Battery Full', 'Chargepoint reserved');
               //SMS.sendSMS('+16508633292', 'Chargepoint reserved');
 							
 							// TODO: Do the Charge Point Reservation.
