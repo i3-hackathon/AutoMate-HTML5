@@ -47,8 +47,11 @@ angular.module('starter.controllers', [])
 		        onTap: function(e) {
 							// Clear the Map
 							for (var i = 0; i < markers.length; i++) {
-								map.removeObject(markers[i]);
+							  if (markers[i]) {
+								  map.removeObject(markers[i]);
+                }
 							}
+							markers = [];
 							
 							var lat = current.Port[0].Geo[0].Lat;
 							var long = current.Port[0].Geo[0].Long;
