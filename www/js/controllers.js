@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint) {
+.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint, Mojio) {
 
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
@@ -44,7 +44,16 @@ angular.module('starter.controllers', [])
 		  });
 	}
 	
-	$scope.showMessage();
+
+	$scope.data = Mojio.data;
+	$scope.$watch('data.findChargePoint', function(newVal, oldVal, scope) {
+	  if (newVal > 0) {
+	    $scope.showMessage();
+    }
+	  console.log('data changed! '+newVal);
+	  scope.findChargePoint = 0;
+  });
+  
 	
 })
 
