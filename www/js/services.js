@@ -81,6 +81,31 @@ angular.module('starter.services', [])
   var Vehicle = bmw_client.model('Vehicle');
   var App = bmw_client.model('App');
 
+  var observeVehicle = function() {
+    bmw_client.get(Vehicle, {}, function(err, vehicles) {
+      if (err) {
+        return console.log(err);
+      }
+
+      //var vehicle = new Vehicle(vehicles.Data[0]);
+      var vehicle = vehicles.Objects[0];
+
+      // observation
+      bmw_client.observe(vehicle, null, function(entity) {
+        //event callback
+        console.log(entity);
+      }, function(err, res) {
+        //connection callback
+        if (err) {
+          console.log('observe vehicle connection error');
+          console.log(err);
+        } else {
+          console.log('observe vehicle connection established');
+        }
+      });
+    });
+  };
+
   var login = function mojioLogin(callback) {
     bmw_client.login(localStorage.mojioUsername, localStorage.mojioPassword, function(err, res) {
       if (err)
@@ -95,22 +120,7 @@ angular.module('starter.services', [])
 
   if (localStorage.getItem('mojioPassword') && localStorage.getItem('mojioUsername')) {
     login(function() {
-      bmw_client.get(Vehicle, {}, function(err, vehicles) {
-        if (err)
-          return console.log(err);
-        //var vehicle = new Vehicle(vehicles.Data[0]);
-        var vehicle = vehicles.Objects[0];
-        bmw_client.observe(vehicle, null, function(entity) {
-          console.log(entity);
-        }, function(err, res) {
-          if (err) {
-            console.log('observe connection error');
-            console.log(err);
-          } else {
-            console.log('observe connection established');
-          }
-        });
-      });
+      observeVehicle();
     });
   }
 
@@ -124,7 +134,9 @@ angular.module('starter.services', [])
     login: function(username, password) {
       localStorage.setItem('mojioUsername', username);
       localStorage.setItem('mojioPassword', password);
-      login();
+      login(function() {
+        observeVehicle(); 
+      });
     }
   };
 })
