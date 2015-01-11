@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint, Mojio) {
+.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint, Mojio, BMW, SMS) {
 
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
@@ -61,6 +61,9 @@ angular.module('starter.controllers', [])
 							map.setZoom(16);
 							
 							map.addObject(marker);
+
+							BMW.navigation('Chargepoint', lat, long);
+              SMS.sendSMS('+16508633292', 'Chargepoint reserved');
 							
 							// TODO: Do the Charge Point Reservation.
 		        }

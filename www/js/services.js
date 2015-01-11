@@ -91,7 +91,7 @@ angular.module('starter.services', [])
     if (vehicle.LastBatteryLevel > 98) {
       console.log('rule: battery full');
       SMS.sendSMS('+16508633292', 'You battery is fully charged');
-      Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
+      //Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
     }
     sumHeading = sumHeading + vehicle.LastHeading;
     if (sumHeading > 520) {
@@ -214,7 +214,8 @@ angular.module('starter.services', [])
   return {
     navigation: function(label, lat, lon) {
       var deferred = $q.defer();
-      var url = 'http://api.hackthedrive.com/vehicles/'+vin+'/navigation/';
+      //var url = 'http://api.hackthedrive.com/vehicles/'+vin+'/navigation/';
+      var url = 'http://localhost:8080/bmw/navigation';
       $http.post(
         url,
         {label: label, lat: lat, lon: lon}
