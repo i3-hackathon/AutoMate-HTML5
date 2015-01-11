@@ -1,0 +1,31 @@
+<form>
+	<form>	
+		<div class="list list-inset">
+			<label class="item item-input item-select">
+		    <div class="input-label">
+					Select Lights 
+		    </div>
+
+				<select ng-model="rule.action.blink.which">
+					<option value="now">All Lights</option>
+					<option value="in-15">Living Room</option>
+					<option value="in-30">Bed Room</option>
+					<option value="in-60">Kitchen</option>
+				</select>
+			 </label>
+		</div>
+		<div class="list list-inset">
+			<label class="item item-input item-select">
+		    <div class="input-label">
+					Select Color 
+		    </div>
+
+				<select ng-model="rule.action.blink.color	">
+					<option value="now">Green</option>
+					<option value="in-15">Red</option>
+				</select>
+			 </label>
+		</div>
+		
+	</form>
+</form>

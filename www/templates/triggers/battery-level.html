@@ -1,7 +1,7 @@
 <form>
 		<div class="row">
 		  <div class="col col-80">
-				<label class="item item-input item-select">
+				<label class="item item-input item-select" >
 				    <div class="input-label">
 							Battery Level 
 				    </div>
@@ -12,13 +12,13 @@
 				  </label>
 		  </div>
 		  <div class="col">
-		  	<input type="text" ng-model="batteryLevel">
+		  	<input type="text" ng-model="rule.trigger.batteryLevel">
 		  </div>
 		</div>
 		
 		<div class="item range range-positive">
 		    <i class="icon ion-ios7-bolt-outline"></i>
-		    <input type="range" name="volume" min="0" max="100" ng-model="batteryLevel">
+		    <input type="range" name="volume" min="0" max="100" ng-model="rule.trigger.batteryLevel">
 		    <i class="icon ion-ios7-bolt"></i>
 		</div>
 </form>

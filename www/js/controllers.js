@@ -30,9 +30,9 @@ angular.module('starter.controllers', [])
     	$scope.settingsModal = modal;
 	});
 	
-    $scope.close = function() {
-  	  $scope.modal.hide();
-    };
+  $scope.close = function() {
+	  $scope.modal.hide();
+  };
 
 	$scope.newRule = function() {
 		$scope.settingsModal.show();
@@ -43,70 +43,113 @@ angular.module('starter.controllers', [])
   $scope.rule = Rules.get($stateParams.ruleId);
 })
 
-.controller('NewRuleCtrl', function($scope, $ionicActionSheet, Rules, Stations) {
+.controller('NewRuleCtrl', function($scope, $ionicActionSheet, Rules, Stations, Labels) {
 
-	$scope.triggerName = 'choose';
+	/* Store and Rest the form */
+  $scope.master = {};
+
+  $scope.update = function(rule) {
+    $scope.master = angular.copy(rule);
+  };
+
+  $scope.reset = function() {
+    $scope.rule = angular.copy($scope.master);
+  };
+
+  $scope.reset();
+	$scope.rule = { trigger : { name : 'choose', label : 'Event' }, action : { name : 'choose', label : 'Action'} };
+	
 	$scope.batteryLevel = 80;
-	$scope.event = "Event"
+	$scope.rule.trigger.batteryLevel = 80;
 	
-    $scope.stations = Stations.all();
 	
-	console.log($scope.stations)
+	/* Just show that a label shows before the type is choosen */
+	//$scope.trigger = "Event";
+	//$scope.action = "Action";
 	
+	$scope.stations = Stations.all();
+	$scope.labels = Labels;
 	
 	$scope.close = function() {
 		$scope.modal.hide();
 	}
 
   $scope.triggerTemplate = function() {
-    return 'templates/triggers/'+$scope.triggerName+'.html';  
+		console.log($scope.rule.trigger)
+    return 'templates/triggers/'+ $scope.rule.trigger.name +'.html';  
   };
+	
+  $scope.actionsTemplate = function() {
+    return 'templates/actions/'+ $scope.rule.action.name +'.html';  
+  };
+	
 
-
-	 /* TODO: Add a new rule  just using local storage, not this setter/getter stuff */
+	/* TODO: Add a new rule  just using local storage, not this setter/getter stuff */
 
 	$scope.save = function() {
 		$scope.modal.hide();
 		
+		/* TODO: Save current form to Local Storage */
 		var object = { id: Rules.all().length ,	  name: 'Get Work Charger',	  event: 'Car is Near Station',	action: 'Reserve Charging Station' }
 		Rules.set(object);
 	}
 	
   // Triggered on a button click, or some other target
   $scope.showTriggers = function() {
-    //TODO: possibly put this in $scope
-	var labels = {
-	  'near-location' : 'Car is Near Location',
-	  'battery-level' : 'Battery Level',
-	  'availability': 	'Station Availability'
-	}
-	var icons = {
-	  'near-location' : 'ion-ios7-location',
-	  'battery-level' : 'ion-battery-low',
-	  'availability': 	'ion-clock'
-	}
-	  
-    var triggerButtons = [
-        { text: '<i class="icon ' + icons['near-location'] + '"></i> ' + labels['near-location'], name: 'near-location' },
-        { text: '<i class="icon ' + icons['battery-level'] + '"></i> ' + labels['battery-level'], name:'battery-level' },
-        { text: '<i class="icon ' + icons['availability'] + '"></i> ' + labels['availability'], name:'availability'}
-    ];
+		var labels = 	$scope.labels;
+    var triggerButtons = [];
+				
+		for (x in labels.triggers) {
+			var item = { text: '<i class="icon event-icon ' + labels.triggers[x].icon + '"></i> ' + labels.triggers[x].name, name: x }
+			triggerButtons.push(item);
+		}
+	
     // Show the action sheet
     var hideSheet = $ionicActionSheet.show({
       buttons: triggerButtons,
       cancelText: 'Cancel',
       cancel: function() {
            // add cancel code..
-         },
+      },
       buttonClicked: function(index) {
-        $scope.triggerName = triggerButtons[index].name;
-		$scope.event = labels[triggerButtons[index].name];
-		
+				var which = triggerButtons[index].name
+      	$scope.rule.trigger.name = which;
+				$scope.rule.trigger.label = labels.triggers[which].name;
+				$scope.triggerLogo = labels.triggers[which].icon;
+				
         return true;
       }
     });
-
   };
+	
+  $scope.showActions = function() {
+		var labels = 	$scope.labels;
+		var actionButtons = [];
+		
+		for (x in labels.actions) {
+			var item = { text: '<i class="icon action-icon ' + labels.actions[x].icon + '"></i> ' + labels.actions[x].name, name: x }
+			actionButtons.push(item);
+		}
+			
+    // Show the action sheet
+    var hideSheet = $ionicActionSheet.show({
+      buttons: actionButtons,
+      cancelText: 'Cancel',
+      cancel: function() {
+           // add cancel code..
+      },
+      buttonClicked: function(index) {
+				var which = actionButtons[index].name
+				
+      	$scope.rule.action.name = which;
+				$scope.rule.action.label = labels.actions[which].name;
+				$scope.actionLogo = labels.actions[which].icon;
+
+        return true;
+      }
+    });
+  };
+	
   
 })
 

@@ -1,10 +1,10 @@
-<form>
 	<div class="list list-inset">
 		<label class="item item-input item-select">
 	    <div class="input-label">
 				Select Station 
 	    </div>
-			<select ng-options="station.name for station in stations" ng-model="rule.trigger.station">
+
+			<select ng-options="station.name for station in stations" ng-model="rule.action.reserve">
 				<option value="">-- Choose a Station --</option>
 			</select>
 		 </label>
@@ -13,14 +13,15 @@
 	<div class="list list-inset">
 		<label class="item item-input item-select">
 	    <div class="input-label">
-				Status 
+				Time 
 	    </div>
 
-			<select ng-model="rule.trigger.availability">
-				<option value="available">Available</option>
-				<option value="available">Not Available</option>
+			<select ng-model="rule.action.reserve.time">
+				<option value="now">Now</option>
+				<option value="in-15">In 15 mins</option>
+				<option value="in-30">In 30 mins</option>
+				<option value="in-60">In 1 hour</option>
 			</select>
 		 </label>
 	</div>
 	
-</form>
