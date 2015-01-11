@@ -17,3 +17,45 @@
 	position:absolute; 
 	left:10px;
 }
+
+#rules .list .item-content{
+	padding-left:28px;
+}
+
+#rules .list .event {
+	border-bottom:solid 1px #DDDDDD;
+	height:40px;
+}
+
+#rules  .list .action {
+	padding-top:12px;
+}
+
+#rules .list .event .icon,
+#rules .list .action .icon {
+	color: #6595CD;
+	font-size:24px;
+	padding-right:10px;
+}
+
+#rules .list .action .icon {
+	color: #4AB94D;
+}
+
+#rules .list .option {
+	background:#F7F7F7;
+	border:solid 1px #EEE;
+	padding:2px;
+	color: #222;
+	margin-left:8px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+
+#rules .ion-edit {
+	position:absolute;
+	right:10px;
+	top:20px;
+}
