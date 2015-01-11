@@ -14,6 +14,74 @@ angular.module('starter.services', [])
 	
 })
 
+.factory('Mojio', function(ConfigService) {
+  console.log('Mojio');
+  console.log(BMWClient);
+  var BMWClient = window.BMWClient;
+  var portNumber = window.location.protocol == "https:" ? 443 : 80;
+  var theScheme = window.location.protocol == "https:" ? 'https' : 'http';
+
+  var config = {
+      application: 'c6aefa95-6f1e-4355-8f70-e497d8a56143',
+      secret: '8ec6a53a-b1da-4a78-aba4-265016716ea7',
+      hostname: 'data.api.hackthedrive.com',
+      port: portNumber,
+      scheme: theScheme,
+      version: 'v1'
+  };
+
+  var bmw_client = new BMWClient(config);
+  var Observer = bmw_client.model('Observer');
+  var Vehicle = bmw_client.model('Vehicle');
+  var App = bmw_client.model('App');
+
+  var login = function mojioLogin(callback) {
+    bmw_client.login(localStorage.mojioUsername, localStorage.mojioPassword, function(err, res) {
+      if (err)
+        console.log("Login error");
+      else 
+        console.log("Login success");
+      if (callback) {
+        return callback();
+      }
+    });
+  };
+
+  if (localStorage.getItem('mojioPassword') && localStorage.getItem('mojioUsername')) {
+    login(function() {
+      bmw_client.get(Vehicle, {}, function(err, vehicles) {
+        if (err)
+          return console.log(err);
+        //var vehicle = new Vehicle(vehicles.Data[0]);
+        var vehicle = vehicles.Objects[0];
+        bmw_client.observe(vehicle, null, function(entity) {
+          console.log(entity);
+        }, function(err, res) {
+          if (err) {
+            console.log('observe connection error');
+            console.log(err);
+          } else {
+            console.log('observe connection established');
+          }
+        });
+      });
+    });
+  }
+
+  return {
+    username: function() {
+      return localStorage.getItem('mojioUsername');
+    },
+    password: function() {
+      return localStorage.getItem('mojioPassword');
+    },
+    login: function(username, password) {
+      localStorage.setItem('mojioUsername', username);
+      localStorage.setItem('mojioPassword', password);
+      login();
+    }
+  };
+})
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array

@@ -130,8 +130,12 @@ angular.module('starter.controllers', [])
 	
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+.controller('AccountCtrl', function($scope, Mojio, ConfigService) {
+  console.log(Mojio.username());
+  $scope.username = Mojio.username() || '';
+  $scope.password = Mojio.password() || '';
+
+  $scope.login = function() {
+    Mojio.login(this.username, this.password);
   };
 });
