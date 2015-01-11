@@ -33,7 +33,7 @@ angular.module('starter.services', [])
 			},
 			'cannot-find-parking' : {
 				name: 'Looking for Parking or Station',
-				icon: 'ion-arrow-return-rightd'
+				icon: 'ion-arrow-return-right'
 			}			
 					
 		},
