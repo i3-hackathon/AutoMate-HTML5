@@ -3,6 +3,10 @@
     background-color: #000000;
 }
 
+.scroll-content, .modal, .modal-backdrop {
+		background: #f8f8f8 !important;
+}
+
 .right {
 	clear:both;
 	display:block;

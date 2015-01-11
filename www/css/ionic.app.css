@@ -3962,7 +3962,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   height: 100%;
   background-color: rgba(0, 0, 0, 0); }
   .modal-backdrop.active {
-    background-color: rgba(0, 0, 0, 0.5); }
+    background-color: #f8f8f8; }
 
 .modal {
   display: block;
@@ -3972,7 +3972,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   overflow: hidden;
   min-height: 100%;
   width: 100%;
-  background-color: #fff; }
+  background-color: #F0F0F0; }
 
 @media (min-width: 680px) {
   .modal {
