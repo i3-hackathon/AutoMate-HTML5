@@ -75,7 +75,6 @@ angular.module('starter.controllers', [])
 	}
 
   $scope.triggerTemplate = function() {
-		console.log($scope.rule.trigger)
     return 'templates/triggers/'+ $scope.rule.trigger.name +'.html';  
   };
 	
