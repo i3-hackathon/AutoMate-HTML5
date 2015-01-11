@@ -4,7 +4,7 @@
 				Select Station 
 	    </div>
 
-			<select ng-options="station.name for station in stations" ng-model="rule.action.reserve">
+			<select ng-options="station.name for station in stations" ng-model="rule.action.option.which">
 				<option value="">-- Choose a Station --</option>
 			</select>
 		 </label>
@@ -16,7 +16,7 @@
 				Time 
 	    </div>
 
-			<select ng-model="rule.action.reserve.time">
+			<select ng-model="rule.action.option.when">
 				<option value="now">Now</option>
 				<option value="in-15">In 15 mins</option>
 				<option value="in-30">In 30 mins</option>
