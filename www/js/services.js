@@ -1,4 +1,4 @@
-var URL = 'http://localhost:8080';
+var URL = 'http://web-01.roadrules.io:8080';
 
 angular.module('starter.services', [])
 
