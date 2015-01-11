@@ -147,8 +147,12 @@ angular.module('starter.controllers', [])
   
 })
 
-.controller('StationsCtrl', function($scope, Stations) {
+.controller('StationsCtrl', function($scope, Stations, Chargepoint) {
 	$scope.stations = Stations.all();
+  
+  Chargepoint.getPublicStations(37.380644,-122.07419).then(function(results) {
+    console.log(results);
+  });
 })
 
 .controller('StationDetailCtrl', function($scope, $stateParams, Stations, ConfigService) {

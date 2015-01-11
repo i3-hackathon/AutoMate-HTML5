@@ -127,6 +127,22 @@ angular.module('starter.services', [])
   };
 })
 
+.service('Chargepoint', function($q, $http) {
+  return {
+    getPublicStations: function(lat, lon) {
+      var deferred = $q.defer();
+
+      $http.post(
+        'http://localhost:8080/chargepoint/getPublicStations',
+        {lat: lat, lon: lon}
+      ).success(function(data) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
+    }
+  };
+})
+
 /**
  * A simple example service that returns some data.
  */
