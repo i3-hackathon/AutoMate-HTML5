@@ -1,7 +1,7 @@
 <div id="task-view" class="modal slide-in-up" ng-controller="NewRuleCtrl">
     <header class="bar bar-header bar-secondary">
       <h1 class="title">New Rule</h1>
-      <button class="button button-clear button-primary" ng-click="close()">Cancel</button>
+      <button class="button button-clear button-primary" ng-click="close();reset(form)">Cancel</button>
     </header>
     <ion-content class="padding has-header">
 	
@@ -35,5 +35,6 @@
 		</div>
 					  
     <button class="button button-primary button-block button-positive" ng-click="save()">Save</button>
+		<input type="button" ng-click="reset(form)" value="Reset" />
     </ion-content>
 </div>
