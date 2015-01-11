@@ -4,7 +4,7 @@
 	    <div class="input-label">
 				Select Station 
 	    </div>
-			<select ng-options="station.name for station in stations" ng-model="rule.trigger.station">
+			<select ng-options="station.name for station in stations" ng-model="rule.trigger.value">
 				<option value="">-- Choose a Station --</option>
 			</select>
 		 </label>
@@ -16,7 +16,7 @@
 				Status 
 	    </div>
 
-			<select ng-model="rule.trigger.availability">
+			<select ng-model="rule.trigger.value">
 				<option value="available">Available</option>
 				<option value="available">Not Available</option>
 			</select>

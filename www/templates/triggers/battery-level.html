@@ -5,20 +5,20 @@
 				    <div class="input-label">
 							Battery Level 
 				    </div>
-				    <select>
+				    <select ng-model="rule.trigger.options.above">
 				      <option>is Above</option>
 				      <option>is Below</option>
 				    </select>
 				  </label>
 		  </div>
-		  <div class="col">
-		  	<input type="text" ng-model="rule.trigger.batteryLevel">
+		  <div class="col" ng-init="rule.trigger.options.level=80">
+		  	<input type="text" ng-model="rule.trigger.options.level">
 		  </div>
 		</div>
 		
 		<div class="item range range-positive">
 		    <i class="icon ion-ios7-bolt-outline"></i>
-		    <input type="range" name="volume" min="0" max="100" ng-model="rule.trigger.batteryLevel">
+		    <input type="range" name="volume" min="0" max="100" ng-model="rule.trigger.options.level">
 		    <i class="icon ion-ios7-bolt"></i>
 		</div>
 </form>
