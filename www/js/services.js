@@ -1,3 +1,5 @@
+var URL = 'http://localhost:8080';
+
 angular.module('starter.services', [])
 
 .factory('ConfigService', function() {
@@ -133,7 +135,7 @@ angular.module('starter.services', [])
       var deferred = $q.defer();
 
       $http.post(
-        'http://localhost:8080/chargepoint/getPublicStations',
+        URL + '/chargepoint/getPublicStations',
         {lat: lat, lon: lon}
       ).success(function(data) {
         deferred.resolve(data);
@@ -141,6 +143,23 @@ angular.module('starter.services', [])
       return deferred.promise;
     }
   };
+})
+
+.service('SMS', function($q, $http) {
+  return {
+    sendSMS: function(to, message) {
+      var deferred = $q.defer();
+
+      $http.post(
+        URL + '/sms',
+        {to: to, message: message}
+      ).success(function(data) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
+    }
+  };
+
 })
 
 /**
