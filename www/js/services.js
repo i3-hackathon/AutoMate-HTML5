@@ -65,7 +65,7 @@ angular.module('starter.services', [])
 	
 })
 
-.factory('Mojio', function(ConfigService, PubNub) {
+.factory('Mojio', function(ConfigService, PubNub, SMS, Pushbullet) {
   console.log('Mojio');
   console.log(BMWClient);
   var BMWClient = window.BMWClient;
@@ -86,6 +86,14 @@ angular.module('starter.services', [])
   var Vehicle = bmw_client.model('Vehicle');
   var App = bmw_client.model('App');
 
+  var checkRules = function(vehicle) {
+    if (vehicle.LastBatteryLevel > 98) {
+      console.log('rule: battery full');
+      SMS.sendSMS('+16508633292', 'You battery is fully charged');
+      //Pushbullet.push('Battery Full', 'Your BMW i3 battery is fully charged.');
+    }
+  };
+
   var observeVehicle = function() {
     bmw_client.get(Vehicle, {}, function(err, vehicles) {
       if (err) {
@@ -100,6 +108,7 @@ angular.module('starter.services', [])
         //event callback
         console.log(entity);
         PubNub.publish('battery_level', entity.LastBatteryLevel);
+        checkRules(entity);
       }, function(err, res) {
         //connection callback
         if (err) {
@@ -159,6 +168,59 @@ angular.module('starter.services', [])
         channel:channel, 
         message:message
       });
+    }
+  };
+})
+
+.service('Pushbullet', function($q, $http) {
+  var token = 'v1meA0XMG49G1xdWqX3xlBailEMVKOBbkRujyZbcIlnoG';
+  return {
+    push: function(title, body) {
+      var deferred = $q.defer();
+      var url = 'https://api.pushbullet.com/v2/pushes';
+      var req = {
+        method: 'POST',
+        url: url,
+        headers: {
+          'Authorization': 'Bearer v1meA0XMG49G1xdWqX3xlBailEMVKOBbkRujyZbcIlnoG'
+        },
+        data: {
+          'type': 'note',
+          'title': title,
+          'body': body
+        }
+      };
+      $http(req).success(function(data) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
+    }
+  };
+})
+
+.service('BMW', function($q, $http) {
+  var vin = 'WBY1Z4C55EV273078';
+  return {
+    navigation: function(label, lat, lon) {
+      var deferred = $q.defer();
+      var url = 'http://api.hackthedrive.com/vehicles/'+vin+'/navigation/';
+      $http.post(
+        url,
+        {label: label, lat: lat, lon: lon}
+      ).success(function(data) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
+    },
+    honk: function() {
+      var deferred = $q.defer();
+      $http.post(
+        'http://api.hackthedrive.com/vehicles/'+vin+'/horn/',
+        {key: 'abcd', 'count': 2}
+      ).success(function(data) {
+        deferred.resolve(data);
+      });
+      return deferred.promise;
     }
   };
 })
