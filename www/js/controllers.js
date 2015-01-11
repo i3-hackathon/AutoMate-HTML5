@@ -5,20 +5,27 @@ angular.module('starter.controllers', [])
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
 	var mapID = document.getElementById('map');
+	var current;
+	markers = [];
 	var options = {
-		zoom: 10,
+		zoom: 12,
 	    center: { lng: -122.122733, lat: 37.411198 }
 	}
 
 	map = new H.Map(document.getElementById('map'), maptypes.terrain.map, options);
 	
   Chargepoint.getPublicStations(37.411198,-122.122733).then(function(results) {
+		
+		current = results[0]
 		for (var i = 0; i < results.length; i++) {
-			var lat = results[i].Port[0].Geo.Lat;
-			var long = results[i].Port[0].Geo.Long;
-	    console.log(results[i].Port[0].Geo);
-			
-			
+		
+			var lat = results[i].Port[0].Geo[0].Lat;
+			var long = results[i].Port[0].Geo[0].Long;
+			var coords = {lat: lat, lng: long};
+      marker = new H.map.Marker(coords);
+			markers.push(marker)
+
+			map.addObject(marker);
 		}
   });
 	
@@ -37,6 +44,20 @@ angular.module('starter.controllers', [])
 		        text: '<b>Reserve</b>',
 		        type: 'button-positive',
 		        onTap: function(e) {
+							// Clear the Map
+							for (var i = 0; i < markers.length; i++) {
+								map.removeObject(markers[i]);
+							}
+							
+							var lat = current.Port[0].Geo[0].Lat;
+							var long = current.Port[0].Geo[0].Long;
+							var coords = {lat: lat, lng: long};
+				      marker = new H.map.Marker(coords);
+							map.setCenter(marker.getPosition())
+							map.setZoom(16);
+							
+							map.addObject(marker);
+							
 							// TODO: Do the Charge Point Reservation.
 		        }
 		      }
@@ -117,23 +138,13 @@ $scope.showPopup = function() {
  };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
-
-/* TODO: Remove */
-.controller('FriendsCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
-})
-
-.controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-  $scope.friend = Friends.get($stateParams.friendId);
-})
-
 /* Rules Controler */
-.controller('RulesCtrl', function($scope, $ionicModal, Rules) {
+.controller('RulesCtrl', function($scope, $ionicModal, Rules, Labels) {
   $scope.rules = Rules.all();
-  
+	$scope.labels = Labels;
+	
+	console.log($scope.labels)
+	
 	$ionicModal.fromTemplateUrl('templates/newRule.html', function(modal) {
     	$scope.settingsModal = modal;
 	});
