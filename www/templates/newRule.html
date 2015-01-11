@@ -6,30 +6,38 @@
     <ion-content class="padding has-header">
 	
 		<div class="card">
-			
-		  <div class="item item-divider">
-				<a href="#" ng-click="showTriggers();" class="right"><i class="icon ion-edit"></i></a>
-		  	{{event}}
-		  </div>
-		  <div class="item item-text-wrap padding">
-        <ng-include src="triggerTemplate()">
-			  
-		  </div>
-		</div>
+			<form>
+			  <div class="item item-divider">
+					<a href="#" ng-click="showTriggers();" class="right"><i class="icon ion-edit"></i></a>
+					<i class="icon {{triggerLogo}}"></i>
+			  	{{rule.trigger.label}}
+				
+			  </div>
+			  <div class="item item-text-wrap padding">
+	        <ng-include src="triggerTemplate()">
+			  </div>
+			</div>
 
-		<div class="card">
-		  <div class="item item-divider">
-		  	Action
-		  </div>
-		  <div class="item item-text-wrap padding">
-	  		<button class="button button-block button-outline button-positive" ng-click="showEvents()">Choose an Action</button>
-			  
-		  </div>
+			<div class="card">
+			  <div class="item item-divider">
+					<a href="#" ng-click="showActions();" class="right"><i class="icon ion-edit"></i></a>
+					<i class="icon {{actionLogo}}"></i>
+			  	{{rule.action.label}}
+			  </div>
+			  <div class="item item-text-wrap padding">
+				
+				  <div class="item item-text-wrap padding">
+		        <ng-include src="actionsTemplate()">
+				  </div>
+							  
+			  </div>
+			</form>
 		</div>
 		
-      <input type="text" placeholder="I need to do this...">
-	  
-      <button class="button button-primary button-block button-positive" ng-click="save()">Save</button>
+		<pre>form = {{rule | json}}</pre>
+		<pre>master = {{master | json}}</pre>
+			  
+    <button class="button button-primary button-block button-positive" ng-click="save()">Save</button>
 	  
     </ion-content>
 	
