@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations) {
+.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint) {
 
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
@@ -10,30 +10,41 @@ angular.module('starter.controllers', [])
 	    center: { lng: -122.122733, lat: 37.411198 }
 	}
 
-	map = new H.Map(document.getElementById('map'), maptypes.terrain.map, options);	
-				
-  var showMessage = $ionicPopup.show({
-    template: 'Your battery is low do you want to reserve the nearest charging station?',
-    title: 'Reserve Station',
-    subTitle: '(BMW Research Mt View)',
-    scope: $scope,
-    buttons: [
-      { text: 'Cancel',	
-				onTap: function(e) {
-					showMessage.close()
-				}
-			},
-      {
-        text: '<b>Reserve</b>',
-        type: 'button-positive',
-        onTap: function(e) {
-					// TODO: Do the Charge Point Reservation.
-        }
-      }
-    ]
+	map = new H.Map(document.getElementById('map'), maptypes.terrain.map, options);
+	
+  Chargepoint.getPublicStations(37.411198,-122.122733).then(function(results) {
+		for (var i = 0; i < results.length; i++) {
+			var lat = results[i].Port[0].Geo.Lat;
+			var long = results[i].Port[0].Geo.Long;
+	    console.log(results[i].Port[0].Geo);
+			
+			
+		}
   });
-		
-	showMessage();
+	
+				
+	$scope.showMessage =  function() {
+		$ionicPopup.show({
+		    template: 'Your battery is low do you want to reserve the nearest charging station?',
+		    title: 'Reserve Station',
+		    subTitle: '(BMW Research Mt View)',
+		    scope: $scope,
+		    buttons: [
+		      { text: 'Cancel',	
+						onTap: function(e) { close() }
+					},
+		      {
+		        text: '<b>Reserve</b>',
+		        type: 'button-positive',
+		        onTap: function(e) {
+							// TODO: Do the Charge Point Reservation.
+		        }
+		      }
+		    ]
+		  });
+	}
+	
+	$scope.showMessage();
 	
 })
 
