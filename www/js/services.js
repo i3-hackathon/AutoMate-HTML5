@@ -197,6 +197,7 @@ angular.module('starter.services', [])
           'Authorization': 'Bearer v1meA0XMG49G1xdWqX3xlBailEMVKOBbkRujyZbcIlnoG'
         },
         data: {
+          'device_iden': 'ujyZbcIlnoGsjArHrh8WLA',
           'type': 'note',
           'title': title,
           'body': body
