@@ -6,9 +6,10 @@
     <ion-content class="padding has-header">
 	
 		<div class="card">
+			
 		  <div class="item item-divider">
-		  	Event
-        <a href="#" ng-click="showTriggers();" style="float: right;"><i class="icon ion-edit"></i></a>
+				<a href="#" ng-click="showTriggers();" class="right"><i class="icon ion-edit"></i></a>
+		  	{{event}}
 		  </div>
 		  <div class="item item-text-wrap padding">
         <ng-include src="triggerTemplate()">

@@ -43,12 +43,17 @@ angular.module('starter.controllers', [])
   $scope.rule = Rules.get($stateParams.ruleId);
 })
 
-.controller('NewRuleCtrl', function($scope, $ionicActionSheet, Rules) {
-
-	console.log(Rules);
+.controller('NewRuleCtrl', function($scope, $ionicActionSheet, Rules, Stations) {
 
 	$scope.triggerName = 'choose';
-
+	$scope.batteryLevel = 80;
+	$scope.event = "Event"
+	
+    $scope.stations = Stations.all();
+	
+	console.log($scope.stations)
+	
+	
 	$scope.close = function() {
 		$scope.modal.hide();
 	}
@@ -70,10 +75,21 @@ angular.module('starter.controllers', [])
   // Triggered on a button click, or some other target
   $scope.showTriggers = function() {
     //TODO: possibly put this in $scope
+	var labels = {
+	  'near-location' : 'Car is Near Location',
+	  'battery-level' : 'Battery Level',
+	  'availability': 	'Station Availability'
+	}
+	var icons = {
+	  'near-location' : 'ion-ios7-location',
+	  'battery-level' : 'ion-battery-low',
+	  'availability': 	'ion-clock'
+	}
+	  
     var triggerButtons = [
-        { text: '<i class="icon ion-ios7-location"></i> Car is Near Location', name: 'near-location' },
-        { text: '<i class="icon ion-battery-low"></i> Battery Level', name:'battery-level' },
-        { text: '<i class="icon ion-clock"></i>  Availability', name:'availability'}
+        { text: '<i class="icon ' + icons['near-location'] + '"></i> ' + labels['near-location'], name: 'near-location' },
+        { text: '<i class="icon ' + icons['battery-level'] + '"></i> ' + labels['battery-level'], name:'battery-level' },
+        { text: '<i class="icon ' + icons['availability'] + '"></i> ' + labels['availability'], name:'availability'}
     ];
     // Show the action sheet
     var hideSheet = $ionicActionSheet.show({
@@ -84,14 +100,11 @@ angular.module('starter.controllers', [])
          },
       buttonClicked: function(index) {
         $scope.triggerName = triggerButtons[index].name;
+		$scope.event = labels[triggerButtons[index].name];
+		
         return true;
       }
     });
-
-    // For example's sake, hide the sheet after two seconds
-    $timeout(function() {
-      hideSheet();
-    }, 2000);
 
   };
   

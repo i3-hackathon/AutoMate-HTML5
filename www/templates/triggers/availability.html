@@ -1,0 +1,27 @@
+<form>
+	<div class="list list-inset">
+		<label class="item item-input item-select">
+	    <div class="input-label">
+				Select Station 
+	    </div>
+
+			<select ng-options="station.name for station in stations" ng-model="selected">
+				<option value="">-- Choose a Station --</option>
+			</select>
+		 </label>
+	</div>
+	
+	<div class="list list-inset">
+		<label class="item item-input item-select">
+	    <div class="input-label">
+				Status 
+	    </div>
+
+			<select>
+				<option value="available">Available</option>
+				<option value="available">Not Available</option>
+			</select>
+		 </label>
+	</div>
+	
+</form>

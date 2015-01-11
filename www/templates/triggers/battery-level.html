@@ -1,3 +1,24 @@
 <form>
-  Battery Level
+		<div class="row">
+		  <div class="col col-80">
+				<label class="item item-input item-select">
+				    <div class="input-label">
+							Battery Level 
+				    </div>
+				    <select>
+				      <option>is Above</option>
+				      <option>is Below</option>
+				    </select>
+				  </label>
+		  </div>
+		  <div class="col">
+		  	<input type="text" ng-model="batteryLevel">
+		  </div>
+		</div>
+		
+		<div class="item range range-positive">
+		    <i class="icon ion-ios7-bolt-outline"></i>
+		    <input type="range" name="volume" min="0" max="100" ng-model="batteryLevel">
+		    <i class="icon ion-ios7-bolt"></i>
+		</div>
 </form>
