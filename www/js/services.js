@@ -68,8 +68,6 @@ angular.module('starter.services', [])
 .factory('Mojio', function($ionicPopup, ConfigService, PubNub, SMS, Pushbullet) {
   
   var data = { findChargePoint: 0};
-  console.log('Mojio');
-  console.log(BMWClient);
   var BMWClient = window.BMWClient;
   var portNumber = window.location.protocol == "https:" ? 443 : 80;
   var theScheme = window.location.protocol == "https:" ? 'https' : 'http';
@@ -116,7 +114,7 @@ angular.module('starter.services', [])
       // observation
       bmw_client.observe(vehicle, null, function(entity) {
         //event callback
-        console.log(entity);
+        //console.log(entity);
         PubNub.publish('battery_level', entity.LastBatteryLevel);
         checkRules(entity);
       }, function(err, res) {
@@ -173,7 +171,7 @@ angular.module('starter.services', [])
     publish_key: 'pub-c-7c88a9b8-5323-4d53-8256-8cd931d155d2',
     subscribe_key: 'sub-c-4248af1a-999f-11e4-91be-02ee2ddab7fe'
   });
-  console.log(pubnub);
+  //console.log(pubnub);
   return {
     publish: function(channel, message) {
       pubnub.publish({
@@ -247,6 +245,8 @@ angular.module('starter.services', [])
         URL + '/chargepoint/getPublicStations',
         {lat: lat, lon: lon}
       ).success(function(data) {
+        console.log('STATIONS');
+        console.log(data);
         deferred.resolve(data);
       });
       return deferred.promise;
