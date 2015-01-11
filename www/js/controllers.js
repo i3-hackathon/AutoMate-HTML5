@@ -9,14 +9,15 @@ angular.module('starter.controllers', [])
 	markers = [];
 	var options = {
 		zoom: 12,
-	    center: { lng: -122.122733, lat: 37.411198 }
+	    center: { lat: 37.774011, lng: -122.403264 }
 	}
 
 	map = new H.Map(document.getElementById('map'), maptypes.terrain.map, options);
 	
-  Chargepoint.getPublicStations(37.411198,-122.122733).then(function(results) {
-		
+  Chargepoint.getPublicStations(37.774011, -122.403264).then(function(results) {
+				
 		current = results[0]
+		
 		for (var i = 0; i < results.length; i++) {
 		
 			var lat = results[i].Port[0].Geo[0].Lat;
@@ -71,7 +72,7 @@ angular.module('starter.controllers', [])
 	  if (newVal > 0) {
 	    $scope.showMessage();
     }
-	  console.log('data changed! '+newVal);
+	  console.log('data changed! '+ newVal);
 	  scope.findChargePoint = 0;
   });
   
