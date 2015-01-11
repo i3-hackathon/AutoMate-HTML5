@@ -1,23 +1,16 @@
 
 <ion-view view-title="Rules">
-  <ion-content>
-  	<button class="button icon-left ion-plus" ng-click="newRule()">New</button>
-  
+  <ion-content>  
     <ion-list>
-      <ion-item class="" type="item-text-wrap">
-	  	
-		<div class="card" ng-repeat="rule in rules">
-		  <div class="item item-divider">
-			  <a class="button icon button-small ion-edit" href="#/tab/rule/{{rule.id}}" style="float:right"></a>
-
-	          {{rule.name}}
-
+			<div class="item item-divider">
+				<button class="button icon-left ion-plus right button-positive" ng-click="newRule()">New</button>
 		  </div>
-		  <div class="item item-text-wrap">
-			  <p>{{rule.event}}</p>
-			  <p>{{rule.action}}</p>
-		  </div>
-		</div>
+
+      <ion-item class="" type="item-text-wrap" ng-repeat="rule in rules" href="#/tab/rule/{{rule.id}}">
+				<a class="button icon button-small ion-edit" href="#/tab/rule/{{rule.id}}" style="float:right"></a>
+				
+			  <div class="event">{{rule.event}}</div>
+			  <div class="action">{{rule.action}}</p>
 		
       </ion-item>
     </ion-list>
