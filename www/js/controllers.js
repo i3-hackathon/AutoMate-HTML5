@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $stateParams, $routeParams, $ionicPopup, ConfigService, Stations) {
+.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations) {
 
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
@@ -32,11 +32,7 @@ angular.module('starter.controllers', [])
       }
     ]
   });
-	
-  showMessage.then(function(res) {
-    console.log('Tapped!', res);
-  });
-	
+		
 	showMessage();
 	
 })
