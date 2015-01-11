@@ -1,9 +1,12 @@
 <ion-view view-title="Stations">
   <ion-content>
     <ion-list>
-      <ion-item class="item-avatar" ng-repeat="station in stations" type="item-text-wrap" href="#/tab/station/{{station.id}}">
+      <ion-item class="item-avatar item-icon-left" ng-repeat="station in stations" type="item-text-wrap" href="#/tab/station/{{station.id}}">
+		
+		<i class="icon ion-location"></i>
+	  
         <h2>{{station.name}}</h2>
-        <p>{{station.id}}</p>
+        <p>{{station.address}}</p>
 		
       </ion-item>
     </ion-list>
