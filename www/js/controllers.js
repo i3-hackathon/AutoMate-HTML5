@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint, Mojio, BMW, SMS) {
+.controller('MapCtrl', function($scope, $stateParams, $ionicPopup, ConfigService, Stations, Chargepoint, Mojio, BMW, SMS, Pushbullet) {
 
 	// Obtain the default map types from the platform object:
 	var maptypes = ConfigService.platform.createDefaultLayers();    
